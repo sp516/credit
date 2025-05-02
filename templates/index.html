@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@375&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Credit Card Recommender</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .offcanvas-start {
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .hamburger {
+      padding: 0.5rem;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+    }
+
+    .hamburger-box {
+      width: 28px;
+      height: 20px;
+      display: inline-block;
+      position: relative;
+    }
+
+    .hamburger-line,
+    .hamburger-line::before {
+      width: 28px;
+      height: 3px;
+      background-color: #000000;
+      border-radius: 2px;
+      position: absolute;
+      left: 0;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger-line {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .hamburger-line::before {
+      content: "";
+      top: -8px;
+      position: absolute;
+    }
+
+    .hamburger.active .hamburger-line {
+      transform: rotate(45deg);
+    }
+
+    .hamburger.active .hamburger-line::before {
+      transform: rotate(-90deg) translateX(8px);
+      top: 0;
+    }
+  </style>
+<style>
+    body {
+      font-family: 'Work Sans', sans-serif;
+    }
+  
+    .navbar-brand,
+    h1, h2, h3, h4, h5, h6,
+    label, button, .form-label {
+      font-family: 'Work Sans', sans-serif;
+      font-weight: 375;
+    }
+  </style>
+</head>
+<body class="bg-light">
+
+<!-- 🔽 Navbar -->
+<nav class="navbar navbar-dark bg-gray">
+  <div class="container-fluid">
+    <button class="hamburger btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">
+      <div class="hamburger-box">
+        <div class="hamburger-line"></div>
+      </div>
+    </button>
+    <a class="navbar-brand" href="/" style="color: #000000;"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M880-720v480q0 33-23.5 56.5T800-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720Zm-720 80h640v-80H160v80Zm0 160v240h640v-240H160Zm0 240v-480 480Z"/></svg> Card Helper</a>
+  </div>
+</nav>
+
+<!-- 🔽 Offcanvas Menu -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Menu</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><a href="/" class="text-decoration-none"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0e6efc"><path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/></svg> Recommendations</a></li>
+      <li class="list-group-item"><a href="/support" class="text-decoration-none"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0e6efc"><path d="M440-120v-80h320v-284q0-117-81.5-198.5T480-764q-117 0-198.5 81.5T200-484v244h-40q-33 0-56.5-23.5T80-320v-80q0-21 10.5-39.5T120-469l3-53q8-68 39.5-126t79-101q47.5-43 109-67T480-840q68 0 129 24t109 66.5Q766-707 797-649t40 126l3 52q19 9 29.5 27t10.5 38v92q0 20-10.5 38T840-249v49q0 33-23.5 56.5T760-120H440Zm-80-280q-17 0-28.5-11.5T320-440q0-17 11.5-28.5T360-480q17 0 28.5 11.5T400-440q0 17-11.5 28.5T360-400Zm240 0q-17 0-28.5-11.5T560-440q0-17 11.5-28.5T600-480q17 0 28.5 11.5T640-440q0 17-11.5 28.5T600-400Zm-359-62q-7-106 64-182t177-76q89 0 156.5 56.5T720-519q-91-1-167.5-49T435-698q-16 80-67.5 142.5T241-462Z"/></svg> Support & Reconsideration</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- 🔽 Main Content -->
+<div class="container py-5">
+  <h1 class="mb-4"><svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#000000"><path d="M880-740v520q0 24-18 42t-42 18H140q-24 0-42-18t-18-42v-520q0-24 18-42t42-18h680q24 0 42 18t18 42ZM140-631h680v-109H140v109Zm0 129v282h680v-282H140Zm0 282v-520 520Z"/></svg> Credit Card Recommender</h1>
+
+  <form method="POST" class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label">Credit Score</label>
+      <input type="number" name="credit_score" min="300" max="850" class="form-control" value="{{ form.get('credit_score', '690') }}">
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Are you new to credit?</label>
+      <select name="is_new" class="form-select">
+        {% for option in ['Yes','No'] %}
+        <option value="{{ option }}" {% if form.get('is_new', 'No') == option %}selected{% endif %}>{{ option }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Which banks do you already use?</label>
+      <select name="banks[]" multiple class="form-select" size="6">
+        {% set selected_banks = form.getlist('banks[]') %}
+        {% for bank in ['Chase','Amex','Capital One','Bank of America','Discover','None'] %}
+        <option value="{{ bank }}" {% if bank in selected_banks %}selected{% endif %}>{{ bank }}</option>
+        {% endfor %}
+      </select>
+      <div class="form-text">Hold ⌘ or Ctrl to select multiple</div>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Opened 5+ cards in last 24 months?</label>
+      <select name="five_twentyfour" class="form-select">
+        {% for option in ['No','Yes','I don’t know'] %}
+        <option value="{{ option }}" {% if form.get('five_twentyfour', 'No') == option %}selected{% endif %}>{{ option }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Do you currently have a Chase Sapphire card?</label>
+      <select name="has_sapphire" class="form-select">
+        {% for option in ['No','Yes','Maybe'] %}
+        <option value="{{ option }}" {% if form.get('has_sapphire', 'No') == option %}selected{% endif %}>{{ option }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Open to annual fees?</label>
+      <select name="open_to_fee" class="form-select">
+        {% for option in ['Yes','No'] %}
+        <option value="{{ option }}" {% if form.get('open_to_fee', 'Yes') == option %}selected{% endif %}>{{ option }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Do you want a premium travel card?</label>
+      <select name="wants_travel_card" class="form-select">
+        {% for option in ['No','Yes'] %}
+        <option value="{{ option }}" {% if form.get('wants_travel_card', 'No') == option %}selected{% endif %}>{{ option }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label">Monthly groceries</label>
+      <input type="number" name="spend_groceries" class="form-control" value="{{ form.get('spend_groceries', '0') }}">
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Monthly dining</label>
+      <input type="number" name="spend_dining" class="form-control" value="{{ form.get('spend_dining', '0') }}">
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Monthly travel</label>
+      <input type="number" name="spend_travel" class="form-control" value="{{ form.get('spend_travel', '0') }}">
+    </div>
+
+    <div class="col-12">
+      <button class="btn btn-primary mt-3" type="submit"><svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#FFFFFF"><path d="M792-120.67 532.67-380q-30 25.33-69.64 39.67Q423.39-326 378.67-326q-108.44 0-183.56-75.17Q120-476.33 120-583.33t75.17-182.17q75.16-75.17 182.5-75.17 107.33 0 182.16 75.17 74.84 75.17 74.84 182.27 0 43.23-14 82.9-14 39.66-40.67 73l260 258.66-48 48Zm-414-272q79.17 0 134.58-55.83Q568-504.33 568-583.33q0-79-55.42-134.84Q457.17-774 378-774q-79.72 0-135.53 55.83-55.8 55.84-55.8 134.84t55.8 134.83q55.81 55.83 135.53 55.83Z"/></svg> Recommend Cards</button>
+    </div>
+  </form>
+
+  {% if error %}
+    <div class="alert alert-danger mt-5 text-center">{{ error }}</div>
+  {% endif %}
+
+  {% if results %}
+    <hr class="my-5">
+    <h2 class="mb-4">🏆 Top Recommendations</h2>
+    <div class="row">
+      {% for card in results %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <img src="{{ card.logo_url }}" class="card-img-top p-3" alt="Logo" style="height: 60px; object-fit: contain;">
+          <div class="card-body">
+            <h5 class="card-title">{{ card.card_name }}</h5>
+            <p class="card-text"><em>{{ card.nickname }}</em></p>
+            <p><strong>Bonus:</strong> {{ card.bonus_offer }}</p>
+            <p><strong>Annual Fee:</strong> ${{ card.annual_fee }}</p>
+            <p><strong>Estimated Value:</strong> ${{ "%.2f"|format(card.score) }}</p>
+            <a href="{{ card.apply_link }}" class="btn btn-success mt-2" target="_blank">Apply Now</a>
+            {% if card.warnings %}
+            <ul class="text-danger small mt-3">
+              {% for w in card.warnings %}
+              <li>{{ w }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const hamburgerBtn = document.querySelector('.hamburger');
+  const offcanvasEl = document.getElementById('offcanvasMenu');
+  const bsOffcanvas = new bootstrap.Offcanvas(offcanvasEl);
+
+  hamburgerBtn.addEventListener('click', () => {
+    hamburgerBtn.classList.toggle('active');
+  });
+
+  offcanvasEl.addEventListener('hidden.bs.offcanvas', () => {
+    hamburgerBtn.classList.remove('active');
+  });
+
+  document.querySelectorAll('.offcanvas a').forEach(link => {
+    link.addEventListener('click', () => {
+      const instance = bootstrap.Offcanvas.getInstance(offcanvasEl);
+      if (instance) instance.hide();
+    });
+  });
+</script>
+</body>
+</html>
